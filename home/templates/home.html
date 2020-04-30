@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>MY TODO LIST</title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href='{% static "home/base.css" %}'>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    </head>
+    <body>
+          <div class="sidenav">
+            <span>Update here</span>
+            <form action="updating/" method="POST">{% csrf_token %}
+                {% for i in task %}
+                    {% if i.completed == True %}
+                        <input type="checkbox" name="tick" value="{{ i.taskname }}" checked>
+                    {% else %}
+                        <input type="checkbox" name="tick" value="{{ i.taskname }}">
+                    {% endif %}
+                    <label>{{ i.taskname }}</label><button id="task" onclick="deletes()" type="button" class="close" aria-label="Close" name="del" value="{{i.taskname}}">
+                      <span aria-hidden="true">&times;</span>
+                    </button><br>
+                    <script>
+                      function deletes(){
+                      var r=window.alert('Want to delete the task?')
+                      if(r){
+                      var xm=new XMLHttpRequest();
+                      xm.open("GET","deleting/");
+                      xm.send(null)
+                      }}
+                    </script>
+                {% endfor %}
+                <input type="submit">
+            </form>
+          </div>
+          <nav class="navbar navbar-dark bg-primary">
+            <span class="navbar-brand mb-0 h1">ToDo List</span>
+            <span class="navbar-brand my-6">Total Items({{ total }})</span>
+          </nav>
+          <p><br></p>
+          <h1 style="text-align: center;">Add, Update and check your progress !</h1>
+          <p><br></p>
+          <form style="text-align: center;" action="adding/" method="POST">{% csrf_token %}
+                <input type="text" name='task' placeholder='Enter task'>
+                <input type="submit" value="Add Task">
+          </form>
+          <p><br></p>
+          <h3 style="text-align: center;">Tasks completed : {{ complete }}</h3>
+          <h3 style="text-align: center;">Tasks left : {{ incomplete }}</h3>
+          <p><br></p>
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{com}}" aria-valuemin="0" aria-valuemax="100" style="width: 50%">{{com}}%</div>
+          </div>
+    </body>
+</html>
