@@ -17,18 +17,10 @@
                     {% else %}
                         <input type="checkbox" name="tick" value="{{ i.taskname }}">
                     {% endif %}
-                    <label>{{ i.taskname }}</label><button id="task" onclick="deletes()" type="button" class="close" aria-label="Close" name="del" value="{{i.taskname}}">
+                    <label>{{ i.taskname }}</label>
+                    <button type="button" class="close" aria-label="Close" name="del" value="{{i.taskname}}">
                       <span aria-hidden="true">&times;</span>
                     </button><br>
-                    <script>
-                      function deletes(){
-                      var r=window.alert('Want to delete the task?')
-                      if(r){
-                      var xm=new XMLHttpRequest();
-                      xm.open("GET","deleting/");
-                      xm.send(null)
-                      }}
-                    </script>
                 {% endfor %}
                 <input type="submit">
             </form>
@@ -49,7 +41,11 @@
           <h3 style="text-align: center;">Tasks left : {{ incomplete }}</h3>
           <p><br></p>
           <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{com}}" aria-valuemin="0" aria-valuemax="100" style="width: 50%">{{com}}%</div>
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{com}}" aria-valuemin="0" aria-valuemax="100" style="margin-left: 300px; width:{{com}}%;">{{com}}%</div>
           </div>
+          <p><br></p>
+          <form style="text-align: center;" action="reset/" method="POST">{% csrf_token %}
+            <input type="submit" value="Reset">
+          </form>
     </body>
 </html>

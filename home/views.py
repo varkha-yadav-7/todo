@@ -6,9 +6,14 @@ def home(request):
     c=tasks.objects.all()
     d=tasks.objects.all().count()
     incom=tasks.objects.filter(completed=False).count()
-    com=d-incom
-    per=com/d
-    per=per*100
+    if(d!=0):
+        com=d-incom
+        per=com/d
+        per=per*100
+    else:
+        com=0
+        per=0
+        incom=0
     return render(request,'home.html',{'com':int(per),'task':c,'total':d,'complete':com,'incomplete':incom})
 
 def adding(request):
@@ -34,5 +39,9 @@ def deleting(request):
     c=tasks.objects.get(taskname=task)
     print(c)
     c.delete()
+    return HttpResponseRedirect('/home/')
+
+def reset(request):
+    tasks.objects.all().delete()
     return HttpResponseRedirect('/home/')
     
