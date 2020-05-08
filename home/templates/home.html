@@ -13,7 +13,19 @@
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
       <script>
+        function deletesTask(id){
+          $.ajax({
+                type: "POST",
+                url: "{% url 'delete' %}",   
+                data: {"csrfmiddlewaretoken":$('input[name=csrfmiddlewaretoken]').val(),"id": id},
+                success: function(){
+                  location.reload();
+                },
+                error: function(){ console.log('error')}
+            });
+        }
         function getsid(id){
+           $('#deleteit').click(function(){
             $.ajax({
                 type: "POST",
                 url: "{% url 'delete' %}",   
@@ -23,6 +35,7 @@
                 },
                 error: function(){ console.log('error')}
             });
+           })
           }
       </script>
       <nav class="navbar navbar-dark bg-primary">
@@ -39,7 +52,7 @@
                         <input id="removed" type="checkbox" name="tick" value="{{ i.id }}">
                     {% endif %}
                     <label id="taskname">{{ i.taskname }}</label>
-                    <button onclick="getsid({{i.id}})" id="cross" value="{{i.taskname}}" style="float: right; margin-left: -50%;" type="button" class="close" aria-label="Close" data-toggle="modal">
+                    <button onclick="getsid({{i.id}})" id="cross" value="{{i.taskname}}" style="float: right; margin-left: -50%;" type="button" class="close" aria-label="Close" data-toggle="modal" data-target="#deleteModal">
                       <span aria-hidden="true">&times;</span>
                     </button>
                     <br>
