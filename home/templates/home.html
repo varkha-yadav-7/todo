@@ -71,8 +71,8 @@
           <h3 style="text-align: center;">Tasks completed : {{ complete }}</h3>
           <h3 style="text-align: center;">Tasks left : {{ incomplete }}</h3>
           <p><br></p>
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{ com }}" aria-valuemin="0" aria-valuemax="100" style="margin-left: 300px; width: {{ com }}%;">{{ com }}%</div>
+          <div class="progress" style="margin-left: 400px; margin-right: 100px;">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{ com }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ com }}%;">{{ com }}%</div>
           </div>
           <p><br></p>
           <form style="text-align: center;" action="reset/" method="POST">{% csrf_token %}
