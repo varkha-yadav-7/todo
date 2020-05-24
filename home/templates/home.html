@@ -13,28 +13,18 @@
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <script>
-        function deletesTask(id){
-          $.ajax({
-                type: "POST",
-                url: "{% url 'delete' %}",   
-                data: {"csrfmiddlewaretoken":$('input[name=csrfmiddlewaretoken]').val(),"id": id},
-                success: function(){
-                  location.reload();
-                },
-                error: function(){ console.log('error')}
-            });
-        }
         function getsid(id){
            $('#deleteit').click(function(){
             $.ajax({
                 type: "POST",
                 url: "{% url 'delete' %}",   
                 data: {"csrfmiddlewaretoken":$('input[name=csrfmiddlewaretoken]').val(),"id": id},
-                success: function(){
-                  location.reload();
-                },
+                success:function(){ location.reload() },
                 error: function(){ console.log('error')}
             });
+           })
+           $('#cancel').click(function(){
+             id=0;
            })
           }
       </script>
@@ -89,7 +79,7 @@
                 </div>
                 <div class="modal-footer">
                  <button name="taskid" id="deleteit" type="button" class="btn btn-primary">Delete</button>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <button id="cancel" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </div>
               </div>
             </div>

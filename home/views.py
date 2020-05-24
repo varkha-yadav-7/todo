@@ -39,12 +39,6 @@ def reset(request):
     return HttpResponseRedirect('/home/')
 
 def delete(request):
-    print('Reached view')
-    if request.method=='POST':
-        print('inside if')
-        taskid=request.POST['id']
-        tasks.objects.get(id=taskid).delete()
-        return HttpResponseRedirect('/home/')
-    else:
-        return HttpResponseRedirect('/home/')
-    
+    taskid=request.POST['id']
+    tasks.objects.get(id=taskid).delete()
+    return HttpResponseRedirect('/home/')
