@@ -1,7 +1,7 @@
 .sidenav {
     margin-top: 55px;
     height: 100%; 
-    width: 300px; 
+    width: 200px; 
     position: fixed; 
     z-index: 1; 
     top: 0; 
@@ -17,10 +17,7 @@
     color: #818181;
     display: block;
   }
-.sidenav a:hover {
-    color: #f1f1f1;
-  }
+
   @media screen and (max-height: 450px) {
     .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
   }
