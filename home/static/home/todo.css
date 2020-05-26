@@ -1,7 +1,8 @@
+.mydiv{ text-align: center;}
 .sidenav {
     margin-top: 55px;
     height: 100%; 
-    width: 200px; 
+    width: 300px; 
     position: fixed; 
     z-index: 1; 
     top: 0; 
@@ -17,7 +18,14 @@
     color: #818181;
     display: block;
   }
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
 
-  @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
+@media screen and (max-width: 768px) {
+    .sidenav span{font-size: 30px;}
   }
